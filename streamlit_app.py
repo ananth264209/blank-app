@@ -7,7 +7,7 @@ import random
 st.set_page_config(page_title="GearSpot - Rent & Lend Gadgets", layout="wide")
 
 # ✅ Logo Link
-LOGO_URL = "https://i.imghippo.com/files/qRZ4936Brs.png"
+LOGO_URL = "https://i.imghippo.com/files/BMC2958Qc.png"
 
 # ✅ Large Banner Image (Only for Home Page)
 BANNER_IMAGE = "https://w0.peakpx.com/wallpaper/425/617/HD-wallpaper-stone-wall-texture-cartoon-wall-background-purple-stone-background-stone-texture.jpg"
