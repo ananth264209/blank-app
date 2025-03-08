@@ -10,7 +10,7 @@ st.set_page_config(page_title="GearSpot - Rent & Lend Gadgets", layout="wide")
 LOGO_URL = "https://i.imghippo.com/files/qRZ4936Brs.png"
 
 # ✅ Large Banner Image (Only for Home Page)
-BANNER_IMAGE = "https://i.imghippo.com/files/qRZ4936Brs.png"
+BANNER_IMAGE = "https://w0.peakpx.com/wallpaper/425/617/HD-wallpaper-stone-wall-texture-cartoon-wall-background-purple-stone-background-stone-texture.jpg"
 
 # ✅ Quotes Section
 quotes = [
@@ -36,7 +36,7 @@ if "available_gadgets" not in st.session_state:
     st.session_state.available_gadgets = pd.DataFrame({
         'Name': ["PlayStation 5", "Canon EOS R5", "Oculus Quest 2", "Dell Alienware"],
         'Category': ["Console", "Camera", "VR Headset", "Laptop"],
-        'Price/Day': [25, 15, 20, 30],
+        'Price/Day': [600, 450, 700, 650],
         'Availability': ["Available", "Rented", "Available", "Available"],
         'Image': [
             "https://gmedia.playstation.com/is/image/SIEPDC/ps5-slim-edition-left-image-block-01-en-24jun24?$1600px--t$",
