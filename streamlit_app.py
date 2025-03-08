@@ -142,7 +142,7 @@ st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["🏠 Home", "📢 Rent a Gadget", "💼 Lend Your Gadget"])
 
 if page == "🏠 Home":
-    st.image(BANNER_IMAGE, use_column_width=True)
+    st.image(BANNER_IMAGE, use_container_width=True)
     st.markdown(f"## ✨ Inspiration of the Day")
     st.markdown(f"### *{selected_quote}*")
     st.markdown("## 🔥 Featured Gadgets")
