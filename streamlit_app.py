@@ -32,18 +32,56 @@ testimonials = [
 ]
 
 # ✅ Initial Available Gadgets
+
 if "available_gadgets" not in st.session_state:
     st.session_state.available_gadgets = pd.DataFrame({
-        'Name': ["PlayStation 5", "Canon EOS R5", "Oculus Quest 2", "Dell Alienware"],
-        'Category': ["Console", "Camera", "VR Headset", "Laptop"],
-        'Price/Day': [600, 450, 700, 650],
-        'Availability': ["Available", "Rented", "Available", "Available"],
+        'Name': [
+            "PlayStation 5",
+            "Canon EOS R5",
+            "Oculus Quest 2",
+            "Dell Alienware",
+            "Spiderman 2 PS5",
+            "Uncharted Remastered PS5",
+            "Marshall Emberton 2",
+            "PS F1 Setup",
+            "Garmin Fenix 7 Pro"
+        ],
+        'Category': [
+            "Console",
+            "Camera",
+            "VR Headset",
+            "Laptop",
+            "Console",
+            "Console",
+            "Speaker",
+            "Console Accessory",
+            "Smartwatch"
+        ],
+        'Price/Day': [600, 450, 700, 650, 500, 400, 300, 700, 450],
+        'Availability': [
+            "Available",
+            "Rented",
+            "Available",
+            "Available",
+            "Available",
+            "Available",
+            "Available",
+            "Available",
+            "Available"
+        ],
         'Image': [
             "https://gmedia.playstation.com/is/image/SIEPDC/ps5-slim-edition-left-image-block-01-en-24jun24?$1600px--t$",
             "https://s7d1.scene7.com/is/image/canon/5077C002_eos-r5-c_primary_clean?fmt=webp-alpha&wid=1600",
             "https://about.fb.com/wp-content/uploads/2020/09/NRP-Facebook_Connect_Introducing_Oculus_Quest_2_the_Next_Generation_of_All-in-One_VR_Gaming_inline-oculus_quest_2_with_controllers.jpg",
-            "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/alienware-notebooks/alienware-x14-r2-intel/media-gallery/notebook-alienware-x14-r2-gray-gallery-7.psd?fmt=png-alpha&pscan=auto&scl=1&wid=4091&hei=2437&qlt=100,1&resMode=sharp2&size=4091,2437&chrss=full&imwidth=5000"
+            "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/alienware-notebooks/alienware-x14-r2-intel/media-gallery/notebook-alienware-x14-r2-gray-gallery-7.psd?fmt=png-alpha&pscan=auto&scl=1&wid=4091&hei=2437&qlt=100,1&resMode=sharp2&size=4091,2437&chrss=full&imwidth=5000",
+            "https://i.imghippo.com/files/w9824it.png",
+            "https://i.imghippo.com/files/WS1286ug.png",
+            "https://i.imghippo.com/files/MtBU4822kNM.png",
+            "https://i.imghippo.com/files/oZl7819EU.png",
+            "https://i.imghippo.com/files/MIdD5194Ro.png"
         ]
+    })
+        
     })
 
 # ✅ Session State for Cart
