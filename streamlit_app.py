@@ -57,15 +57,15 @@ if "available_gadgets" not in st.session_state:
             "Console Accessory",
             "Smartwatch"
         ],
-        'Price/Day': [600, 450, 700, 650, 500, 400, 300, 700, 450],
+        'Price/Day': [700, 550, 900, 650, 250, 150, 700, 1000, 600],
         'Availability': [
             "Available",
             "Rented",
             "Available",
             "Available",
+            "Rented",
             "Available",
-            "Available",
-            "Available",
+            "Rented",
             "Available",
             "Available"
         ],
