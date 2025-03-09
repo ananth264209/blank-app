@@ -81,8 +81,6 @@ if "available_gadgets" not in st.session_state:
             "https://i.imghippo.com/files/MIdD5194Ro.png"
         ]
     })
-        
-    })
 
 # ✅ Session State for Cart
 if "cart" not in st.session_state:
