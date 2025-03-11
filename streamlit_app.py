@@ -176,7 +176,7 @@ with col1:
     st.subheader("Your hub for renting and lending gadgets!")
 with col2:
     if st.button("🛒 Cart"):
-        show_cart()
+        
 
 # ✅ Separate Pages for Renting & Lending
 st.sidebar.title("Navigation")
