@@ -161,7 +161,7 @@ def show_cart():
 
     payment_method = st.sidebar.selectbox("Select Payment Method", payment_methods)
     
-    if st.sidebar.button("Proceed to Payment"):
+if st.sidebar.button("Proceed to Payment"):
     # ✅ Clear the cart
     st.session_state.cart.clear()
     
