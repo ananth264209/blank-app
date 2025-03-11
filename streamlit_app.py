@@ -236,28 +236,39 @@ elif page == "💼 Lend Your Gadget":
     list_gadget_for_rent()
     
 
-# ✅ Trigger WhatsApp redirection after payment
-if st.session_state.get("payment_success", False):
-    st.success("✅ Payment Successful! Redirecting you to WhatsApp...")
+if st.session_state.get("show_cart_flag", False):
+    st.header("🛒 Your Cart")
 
-    whatsapp_number = "919876543210"  # Replace with your number
-    message = "Hi, I just completed my rental order on GearSpot! 📦"
-    encoded_msg = message.replace(" ", "%20")
-    whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
+    if not st.session_state.cart:
+        st.info("Your cart is empty.")
+    else:
+        total_price = sum(item["Total"] for item in st.session_state.cart)
 
-    # JavaScript-based redirection (reliable)
-    st.markdown(
-        f"""
-        <script>
-            window.open("{whatsapp_link}", "_blank");
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
+        for item in st.session_state.cart:
+            st.markdown(f"- **{item['Name']}** for {item['Days']} days — ₹{item['Total']}")
 
-    # Fallback clickable link
-    st.markdown(f"[👉 Click here if you're not redirected automatically]({whatsapp_link})", unsafe_allow_html=True)
+        st.markdown(f"### 💰 Total: ₹{total_price}")
 
-    # Reset the trigger
-    st.session_state.payment_success = False
+        payment_method = st.selectbox("Select Payment Method", payment_methods)
 
+        # ✅ Your main payment button
+        if st.button("Proceed to Payment"):
+            st.success("✅ Payment Successful!")
+
+            # Create WhatsApp message
+            whatsapp_number = "919876543210"  # Replace with your number
+            msg = f"Hi, I just placed an order on GearSpot worth ₹{total_price} for the following items:\n"
+            for item in st.session_state.cart:
+                msg += f"- {item['Name']} for {item['Days']} days\n"
+            msg += "Looking forward to the delivery! 🚀"
+
+            encoded_msg = msg.replace(" ", "%20").replace("\n", "%0A")
+            whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
+
+            # ✅ Show the WhatsApp link
+            st.markdown("Click the link below to complete your order via WhatsApp:")
+            st.markdown(f"[📱 Open WhatsApp Chat]({whatsapp_link})", unsafe_allow_html=True)
+
+            # Clear cart and hide cart view
+            st.session_state.cart.clear()
+            st.session_state.show_cart_flag = False
