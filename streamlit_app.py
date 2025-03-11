@@ -140,30 +140,6 @@ def display_gadgets_for_rent(search_query):
 
             st.write("---")
 
-# ✅ Function to Show the Cart
-def show_cart():
-    st.sidebar.title("🛒 Your Cart")
-    
-    if not st.session_state.cart:
-        st.sidebar.info("Your cart is empty.")
-        return
-    
-    total_price = sum(item["Total"] for item in st.session_state.cart)
-    
-    for idx, item in enumerate(st.session_state.cart):
-        st.sidebar.markdown(f"**{item['Name']}** - {item['Days']} Days - ₹{item['Total']}")
-        if st.sidebar.button(f"❌ Remove {item['Name']}", key=f"remove_{idx}"):
-            del st.session_state.cart[idx]
-            st.experimental_rerun()
-
-    st.sidebar.markdown(f"### Total: ₹{total_price}")
-    
-    payment_method = st.sidebar.selectbox("Select Payment Method", payment_methods)
-
-    # ✅ Proceed to Payment Logic
-    if st.sidebar.button("Proceed to Payment"):
-        st.session_state.payment_success = True
-        st.session_state.cart.clear()
 
        
 
