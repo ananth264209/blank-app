@@ -162,30 +162,10 @@ def show_cart():
 
     # ✅ Proceed to Payment Logic
     if st.sidebar.button("Proceed to Payment"):
+        st.session_state.payment_success = True
         st.session_state.cart.clear()
 
-        # ✅ WhatsApp Redirection
-        whatsapp_number = "919876543210"  # Replace with your own number
-        message = "Hi, I just completed my rental order on GearSpot! 📦"
-        encoded_msg = message.replace(" ", "%20")
-        whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
-
-        st.sidebar.success("✅ Payment Successful! Redirecting to WhatsApp...")
-
-        # ✅ Meta refresh (Auto-Redirect)
-        st.sidebar.markdown(
-            f"""
-            <meta http-equiv="refresh" content="2;url={whatsapp_link}" />
-            """,
-            unsafe_allow_html=True
-        )
-
-        # ✅ Fallback Clickable Link
-        st.sidebar.markdown(
-            f"[👉 If not redirected, click here to continue on WhatsApp]({whatsapp_link})",
-            unsafe_allow_html=True
-        )
-
+       
 
 
 
@@ -254,4 +234,30 @@ elif page == "📢 Rent a Gadget":
 elif page == "💼 Lend Your Gadget":
     st.subheader("💼 List Your Gadget for Lending")
     list_gadget_for_rent()
+    
+
+# ✅ Trigger WhatsApp redirection after payment
+if st.session_state.get("payment_success", False):
+    st.success("✅ Payment Successful! Redirecting you to WhatsApp...")
+
+    whatsapp_number = "919876543210"  # Replace with your number
+    message = "Hi, I just completed my rental order on GearSpot! 📦"
+    encoded_msg = message.replace(" ", "%20")
+    whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
+
+    # JavaScript-based redirection (reliable)
+    st.markdown(
+        f"""
+        <script>
+            window.open("{whatsapp_link}", "_blank");
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Fallback clickable link
+    st.markdown(f"[👉 Click here if you're not redirected automatically]({whatsapp_link})", unsafe_allow_html=True)
+
+    # Reset the trigger
+    st.session_state.payment_success = False
 
