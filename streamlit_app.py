@@ -211,7 +211,7 @@ elif page == "💼 Lend Your Gadget":
     st.subheader("💼 List Your Gadget for Lending")
     list_gadget_for_rent()
     
-
+# ✅ Render Cart on Main Page (Only if user clicks 🛒 Cart)
 if st.session_state.get("show_cart_flag", False):
     st.header("🛒 Your Cart")
 
@@ -220,31 +220,34 @@ if st.session_state.get("show_cart_flag", False):
     else:
         total_price = sum(item["Total"] for item in st.session_state.cart)
 
+        # Display each cart item
         for item in st.session_state.cart:
-            st.markdown(f"- **{item['Name']}** for {item['Days']} days — ₹{item['Total']}")
+            st.markdown(f"**{item['Name']}** — {item['Days']} Days — ₹{item['Total']}")
 
         st.markdown(f"### 💰 Total: ₹{total_price}")
 
+        # Select payment method
         payment_method = st.selectbox("Select Payment Method", payment_methods)
 
-        # ✅ Your main payment button
+        # Proceed to Payment Button
         if st.button("Proceed to Payment"):
             st.success("✅ Payment Successful!")
 
-            # Create WhatsApp message
+            # WhatsApp Redirection Logic
             whatsapp_number = "919876543210"  # Replace with your number
             msg = f"Hi, I just placed an order on GearSpot worth ₹{total_price} for the following items:\n"
             for item in st.session_state.cart:
                 msg += f"- {item['Name']} for {item['Days']} days\n"
             msg += "Looking forward to the delivery! 🚀"
 
+            # Encode for WhatsApp URL
             encoded_msg = msg.replace(" ", "%20").replace("\n", "%0A")
             whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
 
-            # ✅ Show the WhatsApp link
-            st.markdown("Click the link below to complete your order via WhatsApp:")
+            # Show WhatsApp Link
+            st.markdown("Click below to complete your order on WhatsApp:")
             st.markdown(f"[📱 Open WhatsApp Chat]({whatsapp_link})", unsafe_allow_html=True)
 
-            # Clear cart and hide cart view
+            # Clear cart & hide cart view
             st.session_state.cart.clear()
             st.session_state.show_cart_flag = False
