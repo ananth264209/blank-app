@@ -174,6 +174,10 @@ with col1:
     st.image(LOGO_URL, width=150)
     st.title("GearSpot 🚀")
     st.subheader("Your hub for renting and lending gadgets!")
+with col2:
+    # Show 🛒 Cart button
+    if st.button("🛒 Cart"):
+        st.session_state.show_cart_flag = True
         
 
 # ✅ Separate Pages for Renting & Lending
