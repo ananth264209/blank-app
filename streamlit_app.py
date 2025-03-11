@@ -226,7 +226,7 @@ if page == "🏠 Home":
     st.markdown("## 📲 Place Your Order via WhatsApp")
 
 # Replace the below URL with your actual WhatsApp order link
-    manual_whatsapp_link = "https://wa.me/919176376320?text=I'm%20ready%20to%20place%20my%20order%20on%20GearSpot!"
+    manual_whatsapp_link = "https://wa.me/917861864714?text=I'm%20ready%20to%20place%20my%20order%20on%20GearSpot!"
 
     st.markdown(
        f"[🟢 Click here to place your order on WhatsApp]({manual_whatsapp_link})",
