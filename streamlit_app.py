@@ -160,29 +160,30 @@ def show_cart():
     st.sidebar.markdown(f"### Total: ₹{total_price}")
 
     payment_method = st.sidebar.selectbox("Select Payment Method", payment_methods)
-    
-if st.sidebar.button("Proceed to Payment"):
+    if st.sidebar.button("Proceed to Payment"):
     # ✅ Clear the cart
-    st.session_state.cart.clear()
+       st.session_state.cart.clear()
     
     # ✅ Show success message
-    st.sidebar.success("Payment In Progress! Redirecting to WhatsApp...")
+       st.sidebar.success("Payment In Progress! Redirecting to WhatsApp...")
 
     # ✅ WhatsApp redirection (replace number with your own)
-    whatsapp_number = "919176376320"  # 🔁 Replace with your WhatsApp number including country code
-    whatsapp_message = "Hi, I just completed my rental order on GearSpot! 📦"
-    whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message.replace(' ', '%20')}"
+       whatsapp_number = "919176376320"  # 🔁 Replace with your WhatsApp number including country code
+       whatsapp_message = "Hi, I just completed my rental order on GearSpot! 📦"
+       whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message.replace(' ', '%20')}"
     
     # ✅ Display clickable WhatsApp link
-    st.sidebar.markdown(f"[👉 Click here to continue on WhatsApp]({whatsapp_link})", unsafe_allow_html=True)
+       st.sidebar.markdown(f"[👉 Click here to continue on WhatsApp]({whatsapp_link})", unsafe_allow_html=True)
 
     # ✅ Optional: Auto-open WhatsApp link after 2 seconds
-    st.sidebar.markdown(
+       st.sidebar.markdown(
         f"""
         <meta http-equiv="refresh" content="2;url={whatsapp_link}" />
         """,
         unsafe_allow_html=True
-    )
+        )
+    
+
 
 # ✅ Function to List a Gadget for Rent
 def list_gadget_for_rent():
