@@ -5,6 +5,31 @@ import random
 
 # ✅ Set Page Config First
 st.set_page_config(page_title="GearSpot - Rent & Lend Gadgets", layout="wide")
+import os
+
+VISIT_COUNTER_FILE = "visit_count.txt"
+
+# Initialize file if it doesn't exist
+if not os.path.exists(VISIT_COUNTER_FILE):
+    with open(VISIT_COUNTER_FILE, "w") as f:
+        f.write("0")
+
+# Read and increment the counter
+with open(VISIT_COUNTER_FILE, "r") as f:
+    visit_count = int(f.read().strip())
+
+visit_count += 1
+
+# Write the updated counter back
+with open(VISIT_COUNTER_FILE, "w") as f:
+    f.write(str(visit_count))
+
+# Store in session to avoid multiple increments per session
+if "has_counted" not in st.session_state:
+    st.session_state.has_counted = True
+    st.session_state.visit_count = visit_count
+else:
+    st.session_state.visit_count = visit_count
 
 # ✅ Logo Link
 LOGO_URL = "https://i.imghippo.com/files/BMC2958Qc.png"
@@ -193,6 +218,9 @@ if page == "🏠 Home":
             st.markdown(f"**{testimonial['name']}**")
             st.markdown(f"*\"{testimonial['review']}\"*")
             st.write("---")
+
+    st.markdown("---")
+    st.markdown(f"📈 **Total Site Visits:** `{st.session_state.visit_count}`") 
 
 elif page == "📢 Rent a Gadget":
     st.subheader("📢 Available Gadgets for Rent")
