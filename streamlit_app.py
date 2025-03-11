@@ -250,7 +250,7 @@ elif page == "💼 Lend Your Gadget":
 if st.session_state.get("payment_success", False):
     st.success("✅ Payment Successful! Redirecting you to WhatsApp...")
 
-    whatsapp_number = "919876543210"  # Replace with your number
+    whatsapp_number = "919176376320"  # Replace with your number
     message = "Hi, I just completed my rental order on GearSpot! 📦"
     encoded_msg = message.replace(" ", "%20")
     whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
