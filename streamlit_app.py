@@ -160,28 +160,32 @@ def show_cart():
     
     payment_method = st.sidebar.selectbox("Select Payment Method", payment_methods)
 
-    # ✅ New logic: set a session flag instead of redirecting immediately
+    # ✅ Proceed to Payment Logic
     if st.sidebar.button("Proceed to Payment"):
-        st.session_state.payment_success = True
         st.session_state.cart.clear()
-        st.experimental_rerun()  # Rerun to trigger redirect logic
 
-    # ✅ If flag is set, redirect to WhatsApp
-    if st.session_state.get("payment_success", False):
+        # ✅ WhatsApp Redirection
+        whatsapp_number = "919876543210"  # Replace with your own number
+        message = "Hi, I just completed my rental order on GearSpot! 📦"
+        encoded_msg = message.replace(" ", "%20")
+        whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
+
         st.sidebar.success("✅ Payment Successful! Redirecting to WhatsApp...")
 
-        whatsapp_number = "919876543210"  # Replace with your number
-        message = "Hi, I just completed my rental order on GearSpot! 📦"
-        whatsapp_link = f"https://wa.me/{whatsapp_number}?text={message.replace(' ', '%20')}"
-
-        st.sidebar.markdown(f"[👉 Click here to continue on WhatsApp]({whatsapp_link})", unsafe_allow_html=True)
+        # ✅ Meta refresh (Auto-Redirect)
         st.sidebar.markdown(
-            f"""<meta http-equiv="refresh" content="2;url={whatsapp_link}" />""",
+            f"""
+            <meta http-equiv="refresh" content="2;url={whatsapp_link}" />
+            """,
             unsafe_allow_html=True
         )
 
-        # Optional: reset the flag after showing once
-        st.session_state.payment_success = False
+        # ✅ Fallback Clickable Link
+        st.sidebar.markdown(
+            f"[👉 If not redirected, click here to continue on WhatsApp]({whatsapp_link})",
+            unsafe_allow_html=True
+        )
+
 
 
 
