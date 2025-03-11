@@ -222,6 +222,16 @@ if page == "🏠 Home":
             st.markdown(f"**{testimonial['name']}**")
             st.markdown(f"*\"{testimonial['review']}\"*")
             st.write("---")
+    # ✅ Manual WhatsApp Order Link
+    st.markdown("## 📲 Place Your Order via WhatsApp")
+
+# Replace the below URL with your actual WhatsApp order link
+    manual_whatsapp_link = "https://wa.me/919876543210?text=I'm%20ready%20to%20place%20my%20order%20on%20GearSpot!"
+
+    st.markdown(
+       f"[🟢 Click here to place your order on WhatsApp]({manual_whatsapp_link})",
+       unsafe_allow_html=True
+  )
 
     st.markdown("---")
     st.markdown(f"📈 **Total Site Visits:** `{st.session_state.visit_count}`") 
