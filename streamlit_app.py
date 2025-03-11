@@ -142,7 +142,6 @@ def display_gadgets_for_rent(search_query):
 
 # ✅ Function to Show the Cart
 def show_cart():
-    """Displays the cart and payment options."""
     st.sidebar.title("🛒 Your Cart")
     
     if not st.session_state.cart:
@@ -158,21 +157,32 @@ def show_cart():
             st.experimental_rerun()
 
     st.sidebar.markdown(f"### Total: ₹{total_price}")
-
+    
     payment_method = st.sidebar.selectbox("Select Payment Method", payment_methods)
-    if st.sidebar.button("Proceed to Payment"):
-        # Redirect to WhatsApp logic here
-        st.session_state.cart.clear()
-        st.sidebar.success("Payment In Progress! Redirecting to WhatsApp...")
 
-        whatsapp_number = "919176376320"
+    # ✅ New logic: set a session flag instead of redirecting immediately
+    if st.sidebar.button("Proceed to Payment"):
+        st.session_state.payment_success = True
+        st.session_state.cart.clear()
+        st.experimental_rerun()  # Rerun to trigger redirect logic
+
+    # ✅ If flag is set, redirect to WhatsApp
+    if st.session_state.get("payment_success", False):
+        st.sidebar.success("✅ Payment Successful! Redirecting to WhatsApp...")
+
+        whatsapp_number = "919876543210"  # Replace with your number
         message = "Hi, I just completed my rental order on GearSpot! 📦"
         whatsapp_link = f"https://wa.me/{whatsapp_number}?text={message.replace(' ', '%20')}"
 
         st.sidebar.markdown(f"[👉 Click here to continue on WhatsApp]({whatsapp_link})", unsafe_allow_html=True)
-        st.sidebar.markdown(f"""<meta http-equiv="refresh" content="2;url={whatsapp_link}" />""", unsafe_allow_html=True
+        st.sidebar.markdown(
+            f"""<meta http-equiv="refresh" content="2;url={whatsapp_link}" />""",
+            unsafe_allow_html=True
         )
-    
+
+        # Optional: reset the flag after showing once
+        st.session_state.payment_success = False
+
 
 
 # ✅ Function to List a Gadget for Rent
