@@ -140,10 +140,49 @@ def display_gadgets_for_rent(search_query):
 
             st.write("---")
 
+# ✅ Function to Show the Cart
+def show_cart():
+    """Displays the cart and payment options."""
+    st.sidebar.title("🛒 Your Cart")
+    
+    if not st.session_state.cart:
+        st.sidebar.info("Your cart is empty.")
+        return
+    
+    total_price = sum(item["Total"] for item in st.session_state.cart)
+    
+    for idx, item in enumerate(st.session_state.cart):
+        st.sidebar.markdown(f"**{item['Name']}** - {item['Days']} Days - ₹{item['Total']}")
+        if st.sidebar.button(f"❌ Remove {item['Name']}", key=f"remove_{idx}"):
+            del st.session_state.cart[idx]
+            st.experimental_rerun()
 
-       
+    st.sidebar.markdown(f"### Total: ₹{total_price}")
 
+    payment_method = st.sidebar.selectbox("Select Payment Method", payment_methods)
+    
+    if st.sidebar.button("Proceed to Payment"):
+    # ✅ Clear the cart
+    st.session_state.cart.clear()
+    
+    # ✅ Show success message
+    st.sidebar.success("Payment In Progress! Redirecting to WhatsApp...")
 
+    # ✅ WhatsApp redirection (replace number with your own)
+    whatsapp_number = "919176376320"  # 🔁 Replace with your WhatsApp number including country code
+    whatsapp_message = "Hi, I just completed my rental order on GearSpot! 📦"
+    whatsapp_link = f"https://wa.me/{whatsapp_number}?text={whatsapp_message.replace(' ', '%20')}"
+    
+    # ✅ Display clickable WhatsApp link
+    st.sidebar.markdown(f"[👉 Click here to continue on WhatsApp]({whatsapp_link})", unsafe_allow_html=True)
+
+    # ✅ Optional: Auto-open WhatsApp link after 2 seconds
+    st.sidebar.markdown(
+        f"""
+        <meta http-equiv="refresh" content="2;url={whatsapp_link}" />
+        """,
+        unsafe_allow_html=True
+    )
 
 # ✅ Function to List a Gadget for Rent
 def list_gadget_for_rent():
@@ -175,10 +214,8 @@ with col1:
     st.title("GearSpot 🚀")
     st.subheader("Your hub for renting and lending gadgets!")
 with col2:
-    # Show 🛒 Cart button
     if st.button("🛒 Cart"):
-        st.session_state.show_cart_flag = True
-        
+        show_cart()
 
 # ✅ Separate Pages for Renting & Lending
 st.sidebar.title("Navigation")
@@ -212,44 +249,3 @@ elif page == "📢 Rent a Gadget":
 elif page == "💼 Lend Your Gadget":
     st.subheader("💼 List Your Gadget for Lending")
     list_gadget_for_rent()
-    
-# ✅ Render Cart on Main Page (Only if user clicks 🛒 Cart)
-if st.session_state.get("show_cart_flag", False):
-    st.header("🛒 Your Cart")
-
-    if not st.session_state.cart:
-        st.info("Your cart is empty.")
-    else:
-        total_price = sum(item["Total"] for item in st.session_state.cart)
-
-        # Display each cart item
-        for item in st.session_state.cart:
-            st.markdown(f"**{item['Name']}** — {item['Days']} Days — ₹{item['Total']}")
-
-        st.markdown(f"### 💰 Total: ₹{total_price}")
-
-        # Select payment method
-        payment_method = st.selectbox("Select Payment Method", payment_methods)
-
-        # Proceed to Payment Button
-        if st.button("Proceed to Payment"):
-            st.success("✅ Payment Successful!")
-
-            # WhatsApp Redirection Logic
-            whatsapp_number = "919876543210"  # Replace with your number
-            msg = f"Hi, I just placed an order on GearSpot worth ₹{total_price} for the following items:\n"
-            for item in st.session_state.cart:
-                msg += f"- {item['Name']} for {item['Days']} days\n"
-            msg += "Looking forward to the delivery! 🚀"
-
-            # Encode for WhatsApp URL
-            encoded_msg = msg.replace(" ", "%20").replace("\n", "%0A")
-            whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_msg}"
-
-            # Show WhatsApp Link
-            st.markdown("Click below to complete your order on WhatsApp:")
-            st.markdown(f"[📱 Open WhatsApp Chat]({whatsapp_link})", unsafe_allow_html=True)
-
-            # Clear cart & hide cart view
-            st.session_state.cart.clear()
-            st.session_state.show_cart_flag = False
